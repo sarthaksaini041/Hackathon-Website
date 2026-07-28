@@ -3,16 +3,132 @@ import { motion } from 'framer-motion';
 import SectionWrapper, { SectionHeader } from '../ui/SectionWrapper';
 import GalleryLightbox from '../ui/GalleryLightbox';
 
-const images = [
-  { src: '/gallery/gallery-1.webp', alt: 'Participants coding' },
-  { src: '/gallery/gallery-2.webp', alt: 'Team collaboration' },
-  { src: '/gallery/gallery-3.webp', alt: 'Hackathon venue' },
-  { src: '/gallery/gallery-4.webp', alt: 'Keynote presentation' },
-  { src: '/gallery/gallery-5.webp', alt: 'Developers working' },
-  { src: '/gallery/gallery-6.webp', alt: 'Workspace setup' },
-  { src: '/gallery/gallery-7.webp', alt: 'Stage keynote' },
-  { src: '/gallery/gallery-8.webp', alt: 'Project presentation' },
+const galleryItems = [
+  {
+    id: 1,
+    src: '/gallery/gallery-1.webp',
+    alt: 'Participants coding late night',
+    category: 'Coding Sprint',
+    spanClass: 'col-span-1 row-span-2 sm:col-span-1 sm:row-span-2 lg:col-span-1 lg:row-span-2',
+    tilt: 'group-hover:-rotate-1',
+    featured: true,
+  },
+  {
+    id: 2,
+    src: '/gallery/gallery-2.webp',
+    alt: 'Team collaboration and ideation',
+    category: 'Brainstorming',
+    spanClass: 'col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 lg:col-span-2 lg:row-span-1',
+    tilt: 'group-hover:rotate-1',
+  },
+  {
+    id: 3,
+    src: '/gallery/gallery-3.webp',
+    alt: 'Hackathon main hall venue',
+    category: 'Venue & Vibe',
+    spanClass: 'col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 lg:col-span-1 lg:row-span-1',
+    tilt: 'group-hover:-rotate-1',
+  },
+  {
+    id: 4,
+    src: '/gallery/gallery-4.webp',
+    alt: 'Keynote presentation on stage',
+    category: 'Keynotes',
+    spanClass: 'col-span-1 row-span-1 sm:col-span-2 sm:row-span-1 lg:col-span-2 lg:row-span-1',
+    tilt: 'group-hover:rotate-1',
+  },
+  {
+    id: 5,
+    src: '/gallery/gallery-5.webp',
+    alt: 'Developers building together',
+    category: 'Teamwork',
+    spanClass: 'col-span-1 row-span-2 sm:col-span-1 sm:row-span-2 lg:col-span-1 lg:row-span-2',
+    tilt: 'group-hover:-rotate-1',
+    featured: true,
+  },
+  {
+    id: 6,
+    src: '/gallery/gallery-6.webp',
+    alt: 'Workspace setup & dev rig',
+    category: 'Workstation',
+    spanClass: 'col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 lg:col-span-1 lg:row-span-1',
+    tilt: 'group-hover:rotate-1',
+  },
+  {
+    id: 7,
+    src: '/gallery/gallery-7.webp',
+    alt: 'Stage presentation and live pitch',
+    category: 'Project Pitches',
+    spanClass: 'col-span-1 row-span-1 sm:col-span-2 sm:row-span-1 lg:col-span-2 lg:row-span-1',
+    tilt: 'group-hover:-rotate-1',
+  },
+  {
+    id: 8,
+    src: '/gallery/gallery-8.webp',
+    alt: 'Team winning and celebrating awards',
+    category: 'Grand Finale',
+    spanClass: 'col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 lg:col-span-1 lg:row-span-1',
+    tilt: 'group-hover:rotate-1',
+  },
 ];
+
+function GalleryCard({ item, index, onSelect }) {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.5, delay: (index % 6) * 0.07, ease: 'easeOut' }}
+      animate={
+        item.featured
+          ? { y: [0, -5, 0] }
+          : undefined
+      }
+      transition={
+        item.featured
+          ? {
+              y: {
+                duration: 5 + (index % 3),
+                repeat: Infinity,
+                repeatType: 'mirror',
+                ease: 'easeInOut',
+              },
+            }
+          : undefined
+      }
+      className={`group relative overflow-visible cursor-pointer z-0 hover:z-30 ${item.spanClass}`}
+    >
+      <div
+        onClick={() => onSelect(index)}
+        className={`relative h-full w-full overflow-hidden rounded-3xl neumorph-sm transition-all duration-300 ease-out group-hover:scale-[1.06] group-hover:shadow-2xl group-hover:shadow-primary/25 dark:group-hover:shadow-black/70 group-hover:brightness-105 group-hover:contrast-105 ${item.tilt}`}
+      >
+        {/* Skeleton Shimmer */}
+        {!loaded && (
+          <div className="absolute inset-0 animate-pulse bg-slate-300 dark:bg-dark-surface rounded-3xl" />
+        )}
+
+        <img
+          src={item.src}
+          alt={item.alt}
+          loading="lazy"
+          onLoad={() => setLoaded(true)}
+          className={`h-full w-full object-cover transition-opacity duration-500 ${
+            loaded ? 'opacity-100' : 'opacity-0'
+          }`}
+        />
+
+        {/* Category Badge Pill on Hover */}
+        <div className="absolute bottom-3 left-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+          <span className="rounded-full bg-black/60 backdrop-blur-md px-3 py-1 text-[11px] font-medium text-white shadow-sm border border-white/10">
+            {item.category}
+          </span>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function Gallery() {
   const [lightboxIndex, setLightboxIndex] = useState(null);
@@ -26,42 +142,33 @@ export default function Gallery() {
   }
 
   function prevImage() {
-    setLightboxIndex((prev) => (prev > 0 ? prev - 1 : images.length - 1));
+    setLightboxIndex((prev) => (prev > 0 ? prev - 1 : galleryItems.length - 1));
   }
 
   function nextImage() {
-    setLightboxIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
+    setLightboxIndex((prev) => (prev < galleryItems.length - 1 ? prev + 1 : 0));
   }
 
   return (
     <SectionWrapper id="gallery" dark className="bg-bg dark:bg-dark-bg">
       <SectionHeader
         title="Gallery"
-        subtitle="Moments from previous editions. See the energy, creativity, and collaboration in action."
+        subtitle="Moments from previous editions. Experience the energy, creativity, and collaboration in action."
       />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {images.map((image, index) => (
-          <motion.button
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.4, delay: (index % 8) * 0.06 }}
-            whileHover={{ scale: 1.03 }}
-            onClick={() => openLightbox(index)}
-            className="relative w-full h-64 overflow-hidden rounded-2xl neumorph-sm cursor-pointer group bg-slate-200 dark:bg-dark-surface border-0"
-          >
-            <img
-              src={image.src}
-              alt={image.alt}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-          </motion.button>
+
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-[180px] sm:auto-rows-[210px] lg:auto-rows-[230px] gap-5 md:gap-6">
+        {galleryItems.map((item, index) => (
+          <GalleryCard
+            key={item.id}
+            item={item}
+            index={index}
+            onSelect={openLightbox}
+          />
         ))}
       </div>
 
       <GalleryLightbox
-        images={images.map((i) => i.src)}
+        items={galleryItems}
         index={lightboxIndex}
         onClose={closeLightbox}
         onPrev={prevImage}

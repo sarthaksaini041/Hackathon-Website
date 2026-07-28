@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -43,14 +44,14 @@ export default function GalleryLightbox({ items = [], index, onClose, onPrev, on
     setTouchStart(null);
   }
 
-  return (
+  const lightboxContent = (
     <AnimatePresence>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.25 }}
-        className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/90 backdrop-blur-md p-4 sm:p-6 select-none"
+        className="fixed inset-0 z-[999999] flex flex-col items-center justify-center bg-black/95 backdrop-blur-xl p-4 sm:p-6 select-none"
         onClick={onClose}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
@@ -59,7 +60,7 @@ export default function GalleryLightbox({ items = [], index, onClose, onPrev, on
         <button
           onClick={onClose}
           aria-label="Close lightbox"
-          className="absolute top-5 right-5 z-50 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 backdrop-blur-md border border-white/20 transition-all cursor-pointer"
+          className="absolute top-5 right-5 z-[1000000] flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 backdrop-blur-md border border-white/20 transition-all cursor-pointer"
         >
           <X size={22} />
         </button>
@@ -72,20 +73,20 @@ export default function GalleryLightbox({ items = [], index, onClose, onPrev, on
               onPrev();
             }}
             aria-label="Previous image"
-            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 backdrop-blur-md border border-white/20 transition-all cursor-pointer"
+            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-[1000000] flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 backdrop-blur-md border border-white/20 transition-all cursor-pointer"
           >
             <ChevronLeft size={28} />
           </button>
         )}
 
-        {/* Image Content Container */}
+        {/* Image & Caption Container (Vertically Centered) */}
         <motion.div
           key={index}
           initial={{ scale: 0.92, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.92, opacity: 0 }}
           transition={{ duration: 0.25, ease: 'easeOut' }}
-          className="relative max-h-[82vh] max-w-5xl flex flex-col items-center justify-center"
+          className="relative max-h-[85vh] max-w-5xl flex flex-col items-center justify-center my-auto"
           onClick={(e) => e.stopPropagation()}
         >
           <img
@@ -94,7 +95,7 @@ export default function GalleryLightbox({ items = [], index, onClose, onPrev, on
             className="max-h-[75vh] w-auto rounded-3xl object-contain shadow-2xl border border-white/10"
           />
 
-          {/* Caption & Counter Bar */}
+          {/* Caption & Counter */}
           <div className="mt-4 text-center">
             {currentItem.alt && (
               <p className="text-base font-semibold text-white/95">
@@ -115,7 +116,7 @@ export default function GalleryLightbox({ items = [], index, onClose, onPrev, on
               onNext();
             }}
             aria-label="Next image"
-            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 backdrop-blur-md border border-white/20 transition-all cursor-pointer"
+            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-[1000000] flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 backdrop-blur-md border border-white/20 transition-all cursor-pointer"
           >
             <ChevronRight size={28} />
           </button>
@@ -123,4 +124,8 @@ export default function GalleryLightbox({ items = [], index, onClose, onPrev, on
       </motion.div>
     </AnimatePresence>
   );
+
+  return typeof document !== 'undefined'
+    ? createPortal(lightboxContent, document.body)
+    : null;
 }

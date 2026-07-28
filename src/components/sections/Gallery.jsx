@@ -8,67 +8,51 @@ const galleryItems = [
     id: 1,
     src: '/gallery/gallery-1.webp',
     alt: 'Participants coding late night',
-    category: 'Coding Sprint',
     spanClass: 'col-span-1 row-span-2 sm:col-span-1 sm:row-span-2 lg:col-span-1 lg:row-span-2',
-    tilt: 'group-hover:-rotate-1',
     featured: true,
   },
   {
     id: 2,
     src: '/gallery/gallery-2.webp',
     alt: 'Team collaboration and ideation',
-    category: 'Brainstorming',
     spanClass: 'col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 lg:col-span-2 lg:row-span-1',
-    tilt: 'group-hover:rotate-1',
   },
   {
     id: 3,
     src: '/gallery/gallery-3.webp',
     alt: 'Hackathon main hall venue',
-    category: 'Venue & Vibe',
     spanClass: 'col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 lg:col-span-1 lg:row-span-1',
-    tilt: 'group-hover:-rotate-1',
   },
   {
     id: 4,
     src: '/gallery/gallery-4.webp',
     alt: 'Keynote presentation on stage',
-    category: 'Keynotes',
     spanClass: 'col-span-1 row-span-1 sm:col-span-2 sm:row-span-1 lg:col-span-2 lg:row-span-1',
-    tilt: 'group-hover:rotate-1',
   },
   {
     id: 5,
     src: '/gallery/gallery-5.webp',
     alt: 'Developers building together',
-    category: 'Teamwork',
     spanClass: 'col-span-1 row-span-2 sm:col-span-1 sm:row-span-2 lg:col-span-1 lg:row-span-2',
-    tilt: 'group-hover:-rotate-1',
     featured: true,
   },
   {
     id: 6,
     src: '/gallery/gallery-6.webp',
     alt: 'Workspace setup & dev rig',
-    category: 'Workstation',
     spanClass: 'col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 lg:col-span-1 lg:row-span-1',
-    tilt: 'group-hover:rotate-1',
   },
   {
     id: 7,
     src: '/gallery/gallery-7.webp',
     alt: 'Stage presentation and live pitch',
-    category: 'Project Pitches',
     spanClass: 'col-span-1 row-span-1 sm:col-span-2 sm:row-span-1 lg:col-span-2 lg:row-span-1',
-    tilt: 'group-hover:-rotate-1',
   },
   {
     id: 8,
     src: '/gallery/gallery-8.webp',
     alt: 'Team winning and celebrating awards',
-    category: 'Grand Finale',
     spanClass: 'col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 lg:col-span-1 lg:row-span-1',
-    tilt: 'group-hover:rotate-1',
   },
 ];
 
@@ -102,7 +86,7 @@ function GalleryCard({ item, index, onSelect }) {
     >
       <div
         onClick={() => onSelect(index)}
-        className={`relative h-full w-full overflow-hidden rounded-3xl neumorph-sm transition-all duration-300 ease-out group-hover:scale-[1.06] group-hover:shadow-2xl group-hover:shadow-primary/25 dark:group-hover:shadow-black/70 group-hover:brightness-105 group-hover:contrast-105 ${item.tilt}`}
+        className="relative h-full w-full overflow-hidden rounded-3xl neumorph-sm transition-all duration-300 ease-out group-hover:scale-[1.04] group-hover:shadow-xl group-hover:shadow-primary/20 dark:group-hover:shadow-black/60"
       >
         {/* Skeleton Shimmer */}
         {!loaded && (
@@ -118,13 +102,6 @@ function GalleryCard({ item, index, onSelect }) {
             loaded ? 'opacity-100' : 'opacity-0'
           }`}
         />
-
-        {/* Category Badge Pill on Hover */}
-        <div className="absolute bottom-3 left-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-          <span className="rounded-full bg-black/60 backdrop-blur-md px-3 py-1 text-[11px] font-medium text-white shadow-sm border border-white/10">
-            {item.category}
-          </span>
-        </div>
       </div>
     </motion.div>
   );

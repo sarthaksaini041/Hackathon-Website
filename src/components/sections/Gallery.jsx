@@ -9,7 +9,6 @@ const galleryItems = [
     src: '/gallery/gallery-1.webp',
     alt: 'Participants coding late night',
     spanClass: 'col-span-1 row-span-2 sm:col-span-1 sm:row-span-2 lg:col-span-1 lg:row-span-2',
-    featured: true,
   },
   {
     id: 2,
@@ -34,7 +33,6 @@ const galleryItems = [
     src: '/gallery/gallery-5.webp',
     alt: 'Developers building together',
     spanClass: 'col-span-1 row-span-2 sm:col-span-1 sm:row-span-2 lg:col-span-1 lg:row-span-2',
-    featured: true,
   },
   {
     id: 6,
@@ -65,28 +63,13 @@ function GalleryCard({ item, index, onSelect }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.5, delay: (index % 6) * 0.07, ease: 'easeOut' }}
-      animate={
-        item.featured
-          ? { y: [0, -5, 0] }
-          : undefined
-      }
-      transition={
-        item.featured
-          ? {
-              y: {
-                duration: 5 + (index % 3),
-                repeat: Infinity,
-                repeatType: 'mirror',
-                ease: 'easeInOut',
-              },
-            }
-          : undefined
-      }
       className={`group relative overflow-visible cursor-pointer z-0 hover:z-30 ${item.spanClass}`}
     >
-      <div
+      <motion.div
+        whileHover={{ scale: 1.04 }}
+        transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
         onClick={() => onSelect(index)}
-        className="relative h-full w-full overflow-hidden rounded-3xl neumorph-sm transition-all duration-300 ease-out group-hover:scale-[1.04] group-hover:shadow-xl group-hover:shadow-primary/20 dark:group-hover:shadow-black/60"
+        className="relative h-full w-full overflow-hidden rounded-3xl neumorph-sm group-hover:shadow-xl group-hover:shadow-primary/20 dark:group-hover:shadow-black/60"
       >
         {/* Skeleton Shimmer */}
         {!loaded && (
@@ -102,7 +85,7 @@ function GalleryCard({ item, index, onSelect }) {
             loaded ? 'opacity-100' : 'opacity-0'
           }`}
         />
-      </div>
+      </motion.div>
     </motion.div>
   );
 }

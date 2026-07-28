@@ -24,6 +24,44 @@ export default function Navbar({ dark, toggleTheme }) {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   }
 
+  function handleThemeToggle(e) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX || rect.left + rect.width / 2;
+    const y = e.clientY || rect.top + rect.height / 2;
+    const endRadius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    );
+
+    if (!document.startViewTransition) {
+      toggleTheme();
+      return;
+    }
+
+    const transition = document.startViewTransition(() => {
+      toggleTheme();
+    });
+
+    transition.ready.then(() => {
+      const clipPath = [
+        `circle(0px at ${x}px ${y}px)`,
+        `circle(${endRadius}px at ${x}px ${y}px)`,
+      ];
+      document.documentElement.animate(
+        {
+          clipPath: dark ? clipPath.reverse() : clipPath,
+        },
+        {
+          duration: 500,
+          easing: 'ease-in-out',
+          pseudoElement: dark
+            ? '::view-transition-old(root)'
+            : '::view-transition-new(root)',
+        }
+      );
+    });
+  }
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -55,8 +93,8 @@ export default function Navbar({ dark, toggleTheme }) {
               >
                 {link.label}
                 {isActive && (
-                  <motion.span
-                    layoutId="nav-indicator"
+                  <motion.div
+                    layoutId="activeNav"
                     className="absolute bottom-0 left-1/2 h-0.5 w-4 -translate-x-1/2 rounded-full bg-primary"
                   />
                 )}
@@ -67,7 +105,7 @@ export default function Navbar({ dark, toggleTheme }) {
 
         <div className="flex items-center gap-3">
           <button
-            onClick={toggleTheme}
+            onClick={handleThemeToggle}
             aria-label="Toggle theme"
             className="flex h-10 w-10 items-center justify-center rounded-xl neumorph-sm text-muted dark:text-dark-muted hover:text-text dark:hover:text-dark-text cursor-pointer"
           >
@@ -136,6 +174,13 @@ export default function Navbar({ dark, toggleTheme }) {
                     </button>
                   );
                 })}
+                <button
+                  onClick={handleThemeToggle}
+                  className="flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium text-muted dark:text-dark-muted hover:bg-surface dark:hover:bg-dark-surface hover:text-text dark:hover:text-dark-text transition-colors cursor-pointer"
+                >
+                  <span>{dark ? 'Light Mode' : 'Dark Mode'}</span>
+                  {dark ? <Sun size={18} /> : <Moon size={18} />}
+                </button>
                 <hr className="my-3 border-border dark:border-dark-border" />
                 <a
                   href="#register"

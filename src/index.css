@@ -32,6 +32,7 @@ html {
 * {
   scrollbar-width: thin;
   scrollbar-color: #CBD5E1 transparent;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .dark * {
@@ -48,6 +49,11 @@ body {
 .dark body {
   background-color: var(--color-dark-bg);
   color: var(--color-dark-text);
+}
+
+section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 600px;
 }
 
 .neumorph {
@@ -134,26 +140,3 @@ body {
 .animate-spin-slow {
   animation: spin-slow 3s linear infinite;
 }
-
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
-
-::view-transition-old(root) {
-  z-index: 1;
-}
-
-::view-transition-new(root) {
-  z-index: 9999;
-}
-
-.dark::view-transition-old(root) {
-  z-index: 9999;
-}
-
-.dark::view-transition-new(root) {
-  z-index: 1;
-}
-

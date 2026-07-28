@@ -26,7 +26,7 @@ export default function LoadingScreen() {
           >
             <img
               src="/logo.webp"
-              alt="Hackathon Logo"
+              alt="Horizon Logo"
               className="h-24 w-24 sm:h-28 sm:w-28 rounded-3xl object-cover"
             />
           </motion.div>

@@ -34,9 +34,9 @@ export default function Navbar({ dark, toggleTheme }) {
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <button onClick={() => handleNavClick('#home')} className="flex items-center gap-2.5 cursor-pointer">
-          <img src="/logo-sm.webp" alt="Hackathon Logo" width="36" height="36" className="rounded-xl object-cover" />
+          <img src="/logo-sm.webp" alt="Horizon Logo" width="36" height="36" className="rounded-xl object-cover" />
           <span className="text-lg font-bold font-heading text-text dark:text-dark-text">
-            Hackathon
+            Horizon
           </span>
         </button>
 

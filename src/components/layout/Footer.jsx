@@ -29,9 +29,9 @@ export default function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <div className="flex items-center gap-2.5 mb-4">
-              <img src="/logo-sm.webp" alt="Hackathon Logo" width="36" height="36" className="rounded-xl object-cover" />
+              <img src="/logo-sm.webp" alt="Horizon Logo" width="36" height="36" className="rounded-xl object-cover" />
               <span className="text-lg font-bold text-text dark:text-dark-text">
-                Hackathon
+                Horizon
               </span>
             </div>
             <p className="text-sm text-muted dark:text-dark-muted leading-relaxed">
@@ -64,7 +64,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-center gap-2 text-sm text-muted dark:text-dark-muted">
                 <Mail size={14} />
-                <span>hello@hackathon2026.dev</span>
+                <span>hello@horizon2026.dev</span>
               </li>
               <li className="flex items-center gap-2 text-sm text-muted dark:text-dark-muted">
                 <MapPin size={14} />
@@ -94,7 +94,7 @@ export default function Footer() {
 
         <div className="mt-12 pt-8 border-t border-border dark:border-dark-border text-center">
           <p className="text-sm text-muted dark:text-dark-muted">
-            &copy; {new Date().getFullYear()} Hackathon. All rights reserved. Made with{' '}
+            &copy; {new Date().getFullYear()} Horizon. All rights reserved. Made with{' '}
             <Heart size={14} className="inline text-red-500 fill-red-500" /> for the builder community.
           </p>
         </div>

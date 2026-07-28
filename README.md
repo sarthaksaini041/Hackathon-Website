@@ -1,6 +1,6 @@
-# Hackathon Registration Website
+# Horizon — Hackathon Registration Website
 
-A production-grade, fully responsive **Hackathon Registration Website** for **VIT Bhopal** built with React 19, Vite, and Tailwind CSS v4. Features a soft neumorphism design system, dark mode, interactive animations, robust form validation, and optimized local media assets.
+A production-grade, fully responsive **Horizon Hackathon Registration Website** for **VIT Bhopal** built with React 19, Vite, and Tailwind CSS v4. Features a soft neumorphism design system, dark mode, interactive animations, robust form validation, and optimized local media assets.
 
 ## Features
 

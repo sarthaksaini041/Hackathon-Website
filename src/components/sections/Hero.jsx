@@ -44,7 +44,7 @@ export default function Hero() {
             </h1>
 
             <p className="mt-6 text-lg text-muted dark:text-dark-muted max-w-xl leading-relaxed">
-              Join the most anticipated hackathon of the year. Collaborate with brilliant minds, 
+              Join Horizon, the most anticipated hackathon of the year. Collaborate with brilliant minds, 
               learn from industry mentors, and build solutions that make a real impact.
             </p>
 

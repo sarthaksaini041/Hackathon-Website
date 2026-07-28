@@ -27,7 +27,7 @@ export default function About() {
   return (
     <SectionWrapper id="about">
       <SectionHeader
-        title="About the Hackathon"
+        title="About Horizon"
         subtitle="A 48-hour innovation marathon where ideas come to life. Join us for an unforgettable experience of building, learning, and competing."
       />
       <div className="grid gap-6 md:grid-cols-3">

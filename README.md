@@ -29,31 +29,6 @@ A production-grade, fully responsive **Hackathon Registration Website** for **VI
 | React Icons & Lucide | Brand & Interface Icons |
 | React Router DOM | Client-Side Routing |
 
-## Project Structure
-
-```
-hackathon-registration/
-├── public/
-│   ├── gallery/         # Local WebP gallery assets
-│   ├── logo.webp        # Primary high-res logo
-│   ├── logo-sm.webp     # Compact navbar/footer logo
-│   ├── favicon-32.png   # Favicon icon
-│   └── apple-touch-icon.png
-├── src/
-│   ├── components/
-│   │   ├── layout/      # Navbar, Footer
-│   │   ├── sections/    # Hero, About, Schedule, Prizes, Sponsors, Gallery, FAQ, Registration
-│   │   └── ui/          # Select, Checkbox, LoadingScreen, Lightbox, etc.
-│   ├── data/            # Navigation, schedule, prizes, FAQ, and sponsor data
-│   ├── hooks/           # Custom hooks (useTheme, useCountdown, useScrollSpy, etc.)
-│   ├── pages/           # Page routes
-│   ├── App.jsx          # App root
-│   ├── main.jsx         # App entry point
-│   └── index.css        # Design tokens, neumorphic utility styles
-├── vercel.json          # Vercel deployment configuration
-└── vite.config.js       # Vite configuration
-```
-
 ## Running Locally
 
 1. Install dependencies:
